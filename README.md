@@ -1,3 +1,12 @@
-docker compose up --build
+# Biomarker Graph API
 
-docker compose exec api npx prisma db seed
+## Requirements
+
+- Node.js >= 18
+- Docker (for PostgreSQL)
+- Prisma v7
+
+## Run
+
+npm install
+npm run dev
