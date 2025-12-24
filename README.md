@@ -15,9 +15,14 @@ npm install
 
 docker compose up -d db
 
-## Run database migrations
+## Setup .env
+
+cp .env.template .env
+
+## Run database migrations and seed
 
 npx prisma migrate deploy
+npx prisma db seed
 
 ## start the API
 
