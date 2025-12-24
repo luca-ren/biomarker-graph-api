@@ -1,6 +1,6 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../../../src/db/prisma';
 
-export const prisma = new PrismaClient();
+export { prisma };
 
 export async function cleanDb() {
   await prisma.observation.deleteMany({});

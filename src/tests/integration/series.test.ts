@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 import { describe, it, expect, beforeEach, afterAll, beforeAll } from 'vitest';
 import request from 'supertest';
 import { prisma, cleanDb, disconnectDb } from '../helpers/db';
@@ -29,7 +27,6 @@ describe('Series endpoint', () => {
     await prisma.observation.createMany({
       data: [
         {
-          id: '1',
           subjectId,
           analyte: 'glucose',
           loinc,
@@ -38,7 +35,6 @@ describe('Series endpoint', () => {
           measuredAt: new Date('2025-05-01T01:00:00.000Z')
         },
         {
-          id: '2',
           subjectId,
           analyte: 'glucose',
           loinc,
@@ -47,7 +43,6 @@ describe('Series endpoint', () => {
           measuredAt: new Date('2025-01-01T01:00:00.000Z')
         },
         {
-          id: '3',
           subjectId,
           analyte: 'glucose',
           loinc,
