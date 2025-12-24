@@ -14,6 +14,11 @@ type SeriesPoint = {
   normalized: { value: number; unit: string };
 };
 
+function round(value: number, decimals: number) {
+  const factor = Math.pow(10, decimals);
+  return Math.round(value * factor) / factor;
+}
+
 export async function getSeries(q: SeriesQuery) {
   const rows = await findSeriesObservations(q);
 
@@ -65,7 +70,10 @@ export async function getSeries(q: SeriesQuery) {
       );
     }
 
-    const normalizedValue = convertValue(analyte, rawValue, rawUnit, unit);
+    const normalizedValue = round(
+      convertValue(analyte, rawValue, rawUnit, unit),
+      2
+    );
 
     return {
       id: r.id,
