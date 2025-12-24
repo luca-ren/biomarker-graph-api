@@ -31,6 +31,10 @@ export async function findObservations(q: ListObservationsQuery) {
   });
 }
 
+export async function findObservationById(id: string) {
+  return prisma.observation.findFirst({ where: { id, deletedAt: null } });
+}
+
 export async function insertObservation(body: CreateObservationBody) {
   return prisma.observation.create({
     data: {

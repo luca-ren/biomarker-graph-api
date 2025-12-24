@@ -19,4 +19,10 @@ export const listObservationsQuerySchema = z.object({
   cursor: z.string().min(1).optional()
 });
 
+export const observationIdParamSchema = z.object({
+  id: z.string().min(1)
+});
+
 export type ListObservationsQuery = z.infer<typeof listObservationsQuerySchema>;
+
+export type ObservationIdParams = z.infer<typeof observationIdParamSchema>;
