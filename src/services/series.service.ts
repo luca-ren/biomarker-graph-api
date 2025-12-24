@@ -39,6 +39,17 @@ export async function getSeries(q: SeriesQuery) {
     );
   }
 
+  // make sure there is no mixed unit for the same loinc
+  const distinctUnits = new Set(rows.map((r) => r.unitRaw));
+  if (distinctUnits.size > 1) {
+    throw new HttpError(
+      400,
+      `Mixed stored units for loinc '${q.loinc}': ${Array.from(
+        distinctUnits
+      ).join(', ')}`
+    );
+  }
+
   const points: SeriesPoint[] = rows.map((r) => {
     const rawValue =
       typeof (r.valueRaw as any).toNumber === 'function'
