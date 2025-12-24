@@ -15,7 +15,7 @@ export const listObservationsQuerySchema = z.object({
   from: z.coerce.date().optional(),
   to: z.coerce.date().optional(),
   sort: sortSchema,
-  limit: z.coerce.number().int().min(1).max(100).default(10),
+  limit: z.coerce.number().int().min(1).max(100).default(20),
   cursor: z.string().min(1).optional()
 });
 
