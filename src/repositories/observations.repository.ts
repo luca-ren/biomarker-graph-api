@@ -1,4 +1,6 @@
+import { Prisma } from '@prisma/client';
 import { prisma } from '../db/prisma';
+import { CreateObservationBody } from '../validators/observations.create.schema';
 import type { ListObservationsQuery } from '../validators/observations.schemas';
 
 export async function findObservations(q: ListObservationsQuery) {
@@ -26,5 +28,19 @@ export async function findObservations(q: ListObservationsQuery) {
     orderBy: [{ measuredAt: measuredAtOrder }, { id: 'desc' }],
     take: q.limit + 1,
     ...(q.cursor ? { cursor: { id: q.cursor }, skip: 1 } : {})
+  });
+}
+
+export async function insertObservation(body: CreateObservationBody) {
+  return prisma.observation.create({
+    data: {
+      subjectId: body.subjectId,
+      analyte: body.analyte,
+      loinc: body.loinc,
+      valueRaw: new Prisma.Decimal(body.value),
+      unitRaw: body.unit,
+      measuredAt: body.measuredAt,
+      rawPayload: body.rawPayload as Prisma.InputJsonValue
+    }
   });
 }

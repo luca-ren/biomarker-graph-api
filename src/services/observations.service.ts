@@ -1,5 +1,9 @@
 import type { ListObservationsQuery } from '../validators/observations.schemas';
-import { findObservations } from '../repositories/observations.repository';
+import {
+  findObservations,
+  insertObservation
+} from '../repositories/observations.repository';
+import { CreateObservationBody } from '../validators/observations.create.schema';
 
 export async function listObservations(q: ListObservationsQuery) {
   const items = await findObservations(q);
@@ -9,4 +13,8 @@ export async function listObservations(q: ListObservationsQuery) {
   const nextCursor = hasNext ? data[data.length - 1]!.id : null;
 
   return { data, nextCursor };
+}
+
+export async function createObservation(body: CreateObservationBody) {
+  return insertObservation(body);
 }
