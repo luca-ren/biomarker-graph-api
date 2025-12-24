@@ -15,10 +15,6 @@ describe('Series endpoint', () => {
     await cleanDb();
   });
 
-  afterAll(async () => {
-    await disconnectDb();
-  });
-
   it('returns points sorted by measuredAt asc', async () => {
     const subjectId = 'subject_sort';
     const loinc = '2345-7';
