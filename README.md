@@ -4,7 +4,6 @@
 
 - Node.js >= 18
 - Docker (for PostgreSQL)
-- Prisma v6 (easier to manipulate, lot of change in v7)
 - npm
 
 ## Dependencies
@@ -35,8 +34,6 @@ docker compose exec db psql -U app -d app -c "CREATE DATABASE app_test;"
 cp .env.test.template .env.test
 
 npm test
-
-tests use the configured DATABASE_URL
 
 ## API Examples
 
