@@ -40,16 +40,16 @@ tests use the configured DATABASE_URL
 
 ## API Examples
 
-curl -X POST http://localhost:3000/observations \
- -H "Content-Type: application/json" \
- -d '{
-"subjectId": "subject_1",
-"analyte": "glucose",
-"loinc": "2345-7",
-"measuredAt": "2025-01-01T00:00:00.000Z",
-"value": 120,
-"unit": "mg/dL"
-}'
+$body = @{
+subjectId = "subject_1"
+analyte = "glucose"
+loinc = "2345-7"
+measuredAt = "2025-01-01T00:00:00.000Z"
+value = 120
+unit = "mg/dL"
+} | ConvertTo-Json
+
+Invoke-RestMethod -Method Post -Uri "http://localhost:3000/observations" -ContentType "application/json" -Body $body
 
 ### Get time series data
 
