@@ -139,3 +139,7 @@ Default unit chosen per analyte (glucose mg/dL, creatinine umol/L)
 ## Assumption
 
 We suppose the window in the summary query represent the number of month we want to go back starting from the month of the request
+
+## Time spent
+
+Approximately 10 hours
