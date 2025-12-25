@@ -140,6 +140,35 @@ Default unit chosen per analyte (glucose mg/dL, creatinine umol/L)
 
 We suppose the window in the summary query represent the number of month we want to go back starting from the month of the request
 
+## ADR (Architecture Decision Record)
+
+### Decision 1: Store raw values and convert on read
+
+Context: Biomarker values can be expressed in multiple units depending on the source.  
+Decision: Raw values (valueRaw, unitRaw) are stored as-is, and normalization is performed at read time.  
+Consequences: No precision is lost in storage, and additional units can be supported later without data migration.  
+Alternatives considered: Storing only normalized values (rejected due to loss of original data).
+
+### Decision 2: Reject future dates on ingestion only
+
+Context: Observations represent historical medical measurements.  
+Decision: Future `measuredAt` values are rejected only on `POST /observations`.  
+Consequences: Read endpoints remain simple and do not enforce temporal constraints.  
+Alternatives considered: Validating future dates on all read endpoints (unnecessary complexity).
+
+### Decision 3: Summary window expressed in months
+
+Context: The specification does not define the unit of the summary window.  
+Decision: The window parameter represents calendar months.  
+Consequences: The API aligns with typical biomarker collection frequency.  
+Alternatives considered: Day-based windows.
+
+## Questions / ambiguities
+
+Should LOINC uniquely identify a measurement regardless of unit, or can the same LOINC appear with different units?
+Should summary endpoints return data when only one observation exists, or always require at least two?
+Are out-of-range values expected to be flagged explicitly in the API response?
+
 ## Time spent
 
 Approximately 10 hours
