@@ -21,6 +21,7 @@ cp .env.template .env
 ## Run database migrations and seed
 
 npx prisma migrate deploy
+
 npx prisma db seed
 
 ## start the API
@@ -72,7 +73,7 @@ Response example:
 ### Get summary
 
 curl "http://localhost:3000/summary?subjectId=subject_1&loinc=2345-7&window=10"
-!! Adapt windows for observations made in january/may 2025 with window value being number of month before this month.
+window is expressed in months (calendar months)
 
 Response example:
 
