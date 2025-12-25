@@ -166,7 +166,9 @@ Alternatives considered: Day-based windows.
 ## Questions / ambiguities
 
 Should LOINC uniquely identify a measurement regardless of unit, or can the same LOINC appear with different units?
+
 Should summary endpoints return data when only one observation exists, or always require at least two?
+
 Are out-of-range values expected to be flagged explicitly in the API response?
 
 ## Time spent
